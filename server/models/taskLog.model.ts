@@ -8,13 +8,14 @@ import {
 } from "sequelize-typescript";
 import Task from "./task.model";
 import User from "./user.model";
+import ITaskLog from "../../shared/interfaces/taskLog";
 
 @Table({
   timestamps: true,
   tableName: "task_logs",
   underscored: true,
 })
-export default class TaskLog extends Model {
+export default class TaskLog extends Model implements ITaskLog {
   @AllowNull(false)
   @Column
   name!: string;

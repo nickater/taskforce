@@ -12,14 +12,13 @@ import {
 } from "sequelize-typescript";
 import Project from "./project.model";
 import TaskLog from "./taskLog.model";
-import { v4 as uuid } from "uuid";
-
+import ITask from "../../shared/interfaces/task";
 @Table({
   timestamps: true,
   tableName: "tasks",
   underscored: true,
 })
-export default class Task extends Model {
+export default class Task extends Model implements ITask {
   @AllowNull(false)
   @Column(DataType.TEXT)
   description!: string;

@@ -9,13 +9,14 @@ import {
 } from "sequelize-typescript";
 import Task from "./task.model";
 import Customer from "./customer.model";
+import IProject from "../../shared/interfaces/project";
 
 @Table({
   timestamps: true,
   tableName: "projects",
   underscored: true,
 })
-export default class Project extends Model {
+export default class Project extends Model implements IProject {
   @AllowNull(false)
   @Column
   name!: string;
