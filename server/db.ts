@@ -7,5 +7,3 @@ export const db = new Sequelize({
   password: process.env.TASKFORCE_SQL_PASS,
   models: [__dirname + "/models/*"],
 });
-
-export const check = () => console.log(__dirname + "/models/*");

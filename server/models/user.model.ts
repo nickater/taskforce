@@ -1,4 +1,4 @@
-import { Table, Model, HasMany } from "sequelize-typescript";
+import { Table, Model, HasMany, Column, AllowNull } from "sequelize-typescript";
 import TaskLog from "./taskLog.model";
 
 @Table({
@@ -9,4 +9,12 @@ import TaskLog from "./taskLog.model";
 export default class User extends Model {
   @HasMany(() => TaskLog)
   taskLogs?: TaskLog[];
+
+  @AllowNull(false)
+  @Column
+  emailAddress!: string;
+
+  @AllowNull(false)
+  @Column
+  hashedPassword!: string;
 }
