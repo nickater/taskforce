@@ -1,0 +1,58 @@
+<div class="columns is-centered mt-6">
+  <div class="column is-half">
+    <div class="card">
+      <div class="card-header level">
+        <p
+          class="card-header-title level-item has-text-centered is-size-2 has-text-primary"
+        >
+          Sign Up
+        </p>
+      </div>
+      <div class="card-content">
+        <form
+          class="form"
+          [formGroup]="registerFormGroup"
+          (ngSubmit)="submit()"
+        >
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                formControlName="emailAddress"
+                class="input"
+                type="email"
+                placeholder="Email input"
+                value=""
+              />
+              <span class="icon is-small is-left">
+                <fa-icon [icon]="faEnvelope"></fa-icon>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                formControlName="password"
+                class="input"
+                type="email"
+                placeholder="Secret Password"
+                value=""
+              />
+              <span class="icon is-small is-left">
+                <fa-icon [icon]="faKey"></fa-icon>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+              </span>
+            </div>
+          </div>
+          <button type="submit" class="button is-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
