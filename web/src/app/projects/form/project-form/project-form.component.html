@@ -1,0 +1,30 @@
+<div class="columns is-centered mt-6">
+  <div class="column is-half">
+    <div class="card">
+      <div class="card-header level">
+        <p
+          class="card-header-title level-item has-text-centered is-size-2 has-text-primary"
+        >
+          Project
+        </p>
+      </div>
+      <div class="card-content" *ngIf="projectFormGroup">
+        <form class="form" [formGroup]="projectFormGroup" (ngSubmit)="submit()">
+          <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+              <input
+                formControlName="name"
+                class="input"
+                type="text"
+                placeholder="Project name"
+                value=""
+              />
+            </div>
+          </div>
+          <button type="submit" class="button is-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
