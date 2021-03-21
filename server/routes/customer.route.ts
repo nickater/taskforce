@@ -28,7 +28,7 @@ router.get("/:id/projects", async (req, res) => {
     const customer = await Customer.findByPk(req.params.id, {
       include: "projects",
     });
-    res.json(customer?.projects);
+    res.json(customer);
   } catch (error) {
     res.sendStatus(500);
   }

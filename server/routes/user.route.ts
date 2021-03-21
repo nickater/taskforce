@@ -36,7 +36,7 @@ router.post("/login", async (req, res) => {
   if (user) {
     if (await bcrypt.compare(password, user.hashedPassword)) {
       let token = createJwt({ emailAddress, id: user.id });
-      res.json({ idToken: token });
+      res.json({ idToken: token, auth: true });
     } else {
       res.status(400).json({
         msg: "Incorrect email or password",

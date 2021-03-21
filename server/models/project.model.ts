@@ -10,6 +10,7 @@ import {
 import Task from "./task.model";
 import Customer from "./customer.model";
 import IProject from "../../shared/interfaces/project";
+import ITask from "../../shared/interfaces/task";
 
 @Table({
   timestamps: true,
@@ -26,7 +27,7 @@ export default class Project extends Model implements IProject {
   isActive: boolean = true;
 
   @HasMany(() => Task)
-  tasks?: Task[];
+  tasks?: ITask[];
 
   @AllowNull(false)
   @ForeignKey(() => Customer)
