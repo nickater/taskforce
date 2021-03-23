@@ -1,11 +1,11 @@
 <div
   class="section is-medium"
-  *ngIf="projectAndTasks$ | async as projectAndTasks"
+  *ngIf="taskAndTaskLogs$ | async as taskAndTaskLogs"
 >
   <div class="box">
-    <ng-container *ngIf="projectAndTasks.name; else anon">
+    <ng-container *ngIf="taskAndTaskLogs.name; else anon">
       <h1 class="title has-text-centered has-text-primary">
-        {{ projectAndTasks.name }}'s Tasks
+        {{ taskAndTaskLogs.name }}'s Tasks
       </h1>
     </ng-container>
     <ng-template #anon>
@@ -15,16 +15,16 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th class="" scope="col">Name</th>
+          <th class="" scope="col">Description</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let task of projectAndTasks?.tasks; index as i">
+        <tr *ngFor="let task of taskAndTaskLogs?.tasks; index as i">
           <th scope="row">
             <a
-              routerLink="/customers/{{ projectAndTasks.id }}/projects/{{
-                projectAndTasks.id
+              routerLink="/customers/{{ taskAndTaskLogs.id }}/projects/{{
+                taskAndTaskLogs.id
               }}/tasks/{{ task.id }}"
               >{{ i + 1 }}</a
             >
@@ -38,7 +38,7 @@
               [icon]="edit"
               routerLink="{{ task.id }}/edit"
             ></fa-icon>
-            <fa-icon [icon]="trash"></fa-icon>
+            <fa-icon [icon]="trash" (click)="deleteTask(task.id)"></fa-icon>
           </td>
         </tr>
       </tbody>

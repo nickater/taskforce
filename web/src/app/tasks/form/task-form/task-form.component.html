@@ -1,1 +1,30 @@
-<p>task-form works!</p>
+<div class="columns is-centered mt-6">
+  <div class="column is-half">
+    <div class="card">
+      <div class="card-header level">
+        <p
+          class="card-header-title level-item has-text-centered is-size-2 has-text-primary"
+        >
+          Task
+        </p>
+      </div>
+      <div class="card-content" *ngIf="taskFormGroup">
+        <form class="form" [formGroup]="taskFormGroup" (ngSubmit)="submit()">
+          <div class="field">
+            <label class="label">Description</label>
+            <div class="control">
+              <input
+                formControlName="description"
+                class="input"
+                type="text"
+                placeholder="Task description"
+                value=""
+              />
+            </div>
+          </div>
+          <button type="submit" class="button is-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
