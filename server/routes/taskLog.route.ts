@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
     const taskLog = await TaskLog.create(req.body);
     res.json(taskLog);
   } catch (error) {
-    res.sendStatus(500);
+    res.status(500).json(error);
   }
 });
 
