@@ -31,7 +31,10 @@
               [icon]="edit"
               routerLink="{{ project.id }}/edit"
             ></fa-icon>
-            <fa-icon [icon]="trash"></fa-icon>
+            <fa-icon
+              [icon]="trash"
+              (click)="deleteProject(project.id)"
+            ></fa-icon>
           </td>
         </tr>
       </tbody>

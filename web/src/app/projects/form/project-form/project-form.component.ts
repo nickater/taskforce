@@ -44,14 +44,25 @@ export class ProjectFormComponent implements OnInit {
   }
 
   isNewOrEdit() {
+    const options = {
+      customerId: 1,
+      new: 3,
+      edit: {
+        option: 4,
+        projectId: 3,
+      },
+    };
     return this.route.url.pipe(
       map((urlSegs) => {
-        this.customerId = urlSegs[1].path;
-        if (urlSegs[3].path === 'new') {
+        this.customerId = urlSegs[options.customerId].path;
+        if (urlSegs[options.new].path === 'new') {
           return undefined;
-        } else if (urlSegs[3].path === 'edit' && urlSegs[4]?.path) {
-          this.projectId = urlSegs[4].path;
-          return urlSegs[4].path;
+        } else if (
+          urlSegs[options.edit.option].path === 'edit' &&
+          urlSegs[options.edit.projectId]?.path
+        ) {
+          this.projectId = urlSegs[options.edit.projectId].path;
+          return urlSegs[options.edit.projectId].path;
         }
       })
     );
@@ -73,7 +84,6 @@ export class ProjectFormComponent implements OnInit {
     of(this.projectId)
       .pipe(
         switchMap((id) => {
-          debugger;
           if (id) {
             console.log(this.projectFormGroup.value);
             return this.projectService.updateProject({

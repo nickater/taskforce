@@ -18,6 +18,7 @@ export class ProjectViewComponent implements OnInit {
   edit = faEdit;
   plus = faPlus;
   //
+  customerId: string;
   customerAndProjects$: Observable<ICustomer>;
   constructor(
     private route: ActivatedRoute,
@@ -26,12 +27,22 @@ export class ProjectViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.customerAndProjects$ = this.route.url.pipe(
-      switchMap((urlSegs) => this.projectService.getProjects(urlSegs[1].path)),
-      tap(console.log)
+      tap((urlSegs) => (this.customerId = urlSegs[1].path)),
+      switchMap((urlSegs) => this.projectService.getProjects(this.customerId))
     );
   }
 
   getProjects(customerId: string) {
     return this.projectService.getProjects(customerId);
+  }
+
+  deleteProject(projectId: number) {
+    if (confirm('Are you sure you want to delete this project?')) {
+      this.customerAndProjects$ = this.projectService
+        .deleteProject(projectId)
+        .pipe(
+          switchMap(() => this.projectService.getProjects(this.customerId))
+        );
+    }
   }
 }
