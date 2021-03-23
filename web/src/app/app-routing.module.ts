@@ -6,6 +6,7 @@ import { CustomerFormComponent } from './customers/customer-form/customer-form.c
 import { CustomerViewComponent } from './customers/view/customer-view.component';
 import { ProjectFormComponent } from './projects/form/project-form/project-form.component';
 import { ProjectViewComponent } from './projects/view/project-view/project-view.component';
+import { TaskLogViewComponent } from './task-logs/view/task-log-view.component';
 import { TaskFormComponent } from './tasks/form/task-form/task-form.component';
 import { TaskViewComponent } from './tasks/view/task-view/task-view.component';
 
@@ -53,6 +54,10 @@ const routes: Routes = [
   {
     path: 'customers/:id/projects/:id/tasks/:id/edit',
     component: TaskFormComponent,
+  },
+  {
+    path: 'customers/:id/projects/:id/tasks/:id/logs',
+    component: TaskLogViewComponent,
   },
 ];
 
