@@ -16,10 +16,6 @@ import ITaskLog from "../../shared/interfaces/taskLog";
   underscored: true,
 })
 export default class TaskLog extends Model implements ITaskLog {
-  @AllowNull(false)
-  @Column
-  name!: string;
-
   @Column({ field: "duration_minutes" })
   durationInMinutes?: number;
 
