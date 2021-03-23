@@ -26,7 +26,7 @@ export default class Task extends Model implements ITask {
 
   @AllowNull(false)
   @Column
-  isActive!: boolean;
+  isActive?: boolean;
 
   @BelongsTo(() => Project)
   project?: Project;

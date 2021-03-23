@@ -14,7 +14,7 @@ export default class Customer extends Model implements ICustomer {
 
   @AllowNull(false)
   @Column
-  isActive: boolean = true;
+  isActive?: boolean;
 
   @HasMany(() => Project)
   projects?: IProject[];

@@ -1,7 +1,7 @@
 import ITaskLog from "./taskLog";
 
 export default interface ITask {
-  id?: string;
+  id?: number;
   description: string;
   taskLogs?: ITaskLog[];
 }

@@ -24,7 +24,7 @@ export default class Project extends Model implements IProject {
 
   @AllowNull(false)
   @Column
-  isActive: boolean = true;
+  isActive?: boolean;
 
   @HasMany(() => Task)
   tasks?: ITask[];
