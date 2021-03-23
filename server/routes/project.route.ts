@@ -1,11 +1,20 @@
 import express from "express";
 import Project from "../models/project.model";
+import Task from "../models/task.model";
 const router = express.Router();
 
 // Read
 router.get("/", async (req, res) => {
-  const projects = await Project.findAll();
-  res.json(projects);
+  try {
+    const projects = await Project.findAll({
+      where: {
+        isActive: true,
+      },
+    });
+    res.json(projects);
+  } catch (error) {
+    res.sendStatus(500);
+  }
 });
 
 // By ID
@@ -20,11 +29,24 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Get all tasks by Project ID
+// Get all active tasks by Project ID
 router.get("/:id/tasks", async (req, res) => {
   try {
-    const project = await Project.findByPk(req.params.id, { include: "tasks" });
-    res.json(project?.tasks);
+    const project = await Project.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [
+        {
+          model: Task,
+          where: {
+            isActive: true,
+          },
+          required: false,
+        },
+      ],
+    });
+    res.json(project);
   } catch (error) {
     res.sendStatus(500).json({
       error,

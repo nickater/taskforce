@@ -1,11 +1,16 @@
 import express from "express";
 import Customer from "../models/customer.model";
+import Project from "../models/project.model";
 const router = express.Router();
 
 // Read
 router.get("/", async (req, res) => {
   try {
-    const customers = await Customer.findAll();
+    const customers = await Customer.findAll({
+      where: {
+        isActive: true,
+      },
+    });
     res.json(customers);
   } catch (error) {
     res.sendStatus(500);
@@ -22,11 +27,22 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Get all projects by Customer ID
+// Get all active projects by Customer ID
 router.get("/:id/projects", async (req, res) => {
   try {
-    const customer = await Customer.findByPk(req.params.id, {
-      include: "projects",
+    const customer = await Customer.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [
+        {
+          model: Project,
+          where: {
+            isActive: true,
+          },
+          required: false,
+        },
+      ],
     });
     res.json(customer);
   } catch (error) {
