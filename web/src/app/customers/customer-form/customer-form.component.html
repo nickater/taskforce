@@ -16,7 +16,7 @@
         >
           <div class="field">
             <label class="label">Name</label>
-            <div class="control">
+            <div class="control has-icons-left">
               <input
                 formControlName="name"
                 class="input"
@@ -24,6 +24,9 @@
                 placeholder="Customer name"
                 value=""
               />
+              <span class="icon is-small is-left">
+                <fa-icon [icon]="customerIcon"></fa-icon>
+              </span>
             </div>
           </div>
           <button type="submit" class="button is-primary">Submit</button>

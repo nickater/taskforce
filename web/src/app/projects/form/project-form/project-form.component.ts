@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import IProject from '../../../../../../shared/interfaces/project';
 import { ProjectService } from '../../project.service';
-
+import { faProjectDiagram } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-project-form',
   templateUrl: './project-form.component.html',
@@ -15,6 +15,7 @@ export class ProjectFormComponent implements OnInit {
   projectFormGroup: FormGroup;
   projectId: string;
   customerId: string;
+  projectIcon = faProjectDiagram;
 
   constructor(
     private route: ActivatedRoute,

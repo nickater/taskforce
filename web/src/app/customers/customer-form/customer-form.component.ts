@@ -6,6 +6,7 @@ import { map, switchMap, take, tap } from 'rxjs/operators';
 import { ServerService } from 'src/app/services/server.service';
 import ICustomer from '../../../../../shared/interfaces/customer';
 import { CustomerService } from '../customer.service';
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-customer-form',
@@ -15,6 +16,7 @@ import { CustomerService } from '../customer.service';
 export class CustomerFormComponent implements OnInit {
   customerFormGroup: FormGroup;
   customerId: string;
+  customerIcon = faUserPlus;
 
   constructor(
     private route: ActivatedRoute,
