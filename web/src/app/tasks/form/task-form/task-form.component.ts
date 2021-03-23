@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { switchMap, map, take } from 'rxjs/operators';
 import ITask from '../../../../../../shared/interfaces/task';
 import { TaskService } from '../../task.service';
-
+import { faTasks } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-task-form',
   templateUrl: './task-form.component.html',
@@ -16,6 +16,7 @@ export class TaskFormComponent implements OnInit {
   customerId: string;
   projectId: string;
   taskId: string;
+  tasksIcon = faTasks;
 
   constructor(
     private route: ActivatedRoute,
