@@ -25,11 +25,13 @@ export class TaskService {
     return this.serverService.request<ITask>('POST', `/tasks`, task);
   }
 
-  updateTask(project: Partial<ITask>) {
-    return this.serverService.request<ITask>(
-      'PUT',
-      `/projects/${project.id}`,
-      project
-    );
+  updateTask(task: Partial<ITask>) {
+    return this.serverService.request<ITask>('PUT', `/tasks/${task.id}`, task);
+  }
+
+  deleteTask(taskId: number) {
+    return this.serverService.request<ITask>('PUT', `/tasks/${taskId}`, {
+      isActive: false,
+    });
   }
 }
