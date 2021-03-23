@@ -1,16 +1,13 @@
-<div
-  class="section is-medium"
-  *ngIf="customerAndProjects$ | async as customerAndProjects"
->
+<div class="section is-medium"
+     *ngIf="customerAndProjects$ | async as customerAndProjects">
   <div class="box">
-    <h1 class="title has-text-centered has-text-primary">
-      {{ customerAndProjects.name }}'s Projects
-    </h1>
+    <h1 class="title has-text-centered has-text-primary"> {{ customerAndProjects.name }}'s Projects </h1>
     <table class="table is-fullwidth">
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th class="" scope="col">Name</th>
+          <th class=""
+              scope="col">Name</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -18,32 +15,24 @@
         <tr *ngFor="let project of customerAndProjects?.projects; index as i">
           <th scope="row">{{ i + 1 }}</th>
           <td class="">
-            <a
-              routerLink="/customers/{{ customerAndProjects.id }}/projects/{{
+            <a routerLink="/customers/{{ customerAndProjects.id }}/projects/{{
                 project.id
-              }}/tasks"
-              >{{ project.name }}</a
-            >
+              }}/tasks">{{ project.name }}</a>
           </td>
           <td class="is-flex is-justify-content-flex-end">
-            <fa-icon
-              class="mr-6"
-              [icon]="edit"
-              routerLink="{{ project.id }}/edit"
-            ></fa-icon>
-            <fa-icon
-              [icon]="trash"
-              (click)="deleteProject(project.id)"
-            ></fa-icon>
+            <fa-icon class="mr-6"
+                     [icon]="edit"
+                     routerLink="{{ project.id }}/edit"></fa-icon>
+            <fa-icon [icon]="trash"
+                     (click)="deleteProject(project.id)"></fa-icon>
           </td>
         </tr>
       </tbody>
     </table>
     <div class="columns is-full">
       <div class="column is-flex is-justify-content-flex-end">
-        <button class="button is-info is-small" routerLink="new">
-          Add Project
-        </button>
+        <button class="button is-info is-small"
+                routerLink="new"> Add Project </button>
       </div>
     </div>
   </div>

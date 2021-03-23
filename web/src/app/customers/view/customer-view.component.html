@@ -5,7 +5,8 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th class="" scope="col">Name</th>
+          <th class=""
+              scope="col">Name</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -18,24 +19,19 @@
             }}</a>
           </td>
           <td class="is-flex is-justify-content-flex-end">
-            <fa-icon
-              class="mr-6"
-              [icon]="edit"
-              routerLink="{{ customer.id }}/edit"
-            ></fa-icon>
-            <fa-icon
-              [icon]="trash"
-              (click)="deleteCustomer(customer.id)"
-            ></fa-icon>
+            <fa-icon class="mr-6"
+                     [icon]="edit"
+                     routerLink="{{ customer.id }}/edit"></fa-icon>
+            <fa-icon [icon]="trash"
+                     (click)="deleteCustomer(customer.id)"></fa-icon>
           </td>
         </tr>
       </tbody>
     </table>
     <div class="columns is-full">
       <div class="column is-flex is-justify-content-flex-end">
-        <button class="button is-info is-small" routerLink="new">
-          Add Customer
-        </button>
+        <button class="button is-info is-small"
+                routerLink="new"> Add Customer </button>
       </div>
     </div>
   </div>

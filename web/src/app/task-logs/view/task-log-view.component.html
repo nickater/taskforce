@@ -1,7 +1,5 @@
-<div
-  class="section is-medium"
-  *ngIf="taskAndTaskLogs$ | async as taskAndTaskLogs"
->
+<div class="section is-medium"
+     *ngIf="taskAndTaskLogs$ | async as taskAndTaskLogs">
   <div class="box">
     <ng-template>
       <h1 class="title has-text-centered has-text-primary">Logs</h1>
@@ -10,35 +8,29 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th class="" scope="col">Durations</th>
+          <th class=""
+              scope="col">Durations</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let task of taskAndTaskLogs?.taskLogs; index as i">
           <th scope="row">
-            <a
-              routerLink="/customers/{{ taskAndTaskLogs.id }}/projects/{{
+            <a routerLink="/customers/{{ taskAndTaskLogs.id }}/projects/{{
                 taskAndTaskLogs.id
-              }}/tasks/{{ task.id }}/logs"
-              >{{ i + 1 }}</a
-            >
+              }}/tasks/{{ task.id }}/logs">{{ i + 1 }}</a>
           </th>
           <td class="">
-            <a
-              routerLink="/customers/{{ taskAndTaskLogs.id }}/projects/{{
+            <a routerLink="/customers/{{ taskAndTaskLogs.id }}/projects/{{
                 taskAndTaskLogs.id
-              }}/tasks/{{ task.id }}/logs"
-              >{{ task.durationInMinutes | number }}</a
-            >
+              }}/tasks/{{ task.id }}/logs">{{ task.durationInMinutes | number }}</a>
           </td>
         </tr>
       </tbody>
     </table>
     <div class="columns is-full">
       <div class="column is-flex is-justify-content-flex-end">
-        <button class="button is-info is-small" routerLink="new">
-          Add Time
-        </button>
+        <button class="button is-info is-small"
+                routerLink="new"> Add Time </button>
       </div>
     </div>
   </div>

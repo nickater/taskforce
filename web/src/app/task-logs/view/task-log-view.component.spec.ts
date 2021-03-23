@@ -8,9 +8,8 @@ describe('TaskLogViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TaskLogViewComponent ]
-    })
-    .compileComponents();
+      declarations: [TaskLogViewComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
