@@ -23,7 +23,10 @@
               [icon]="edit"
               routerLink="{{ customer.id }}/edit"
             ></fa-icon>
-            <fa-icon [icon]="trash"></fa-icon>
+            <fa-icon
+              [icon]="trash"
+              (click)="deleteCustomer(customer.id)"
+            ></fa-icon>
           </td>
         </tr>
       </tbody>

@@ -47,7 +47,7 @@ export class CustomerFormComponent implements OnInit {
     return this.route.url.pipe(
       tap(console.log),
       map((urlSegs) => {
-        if (urlSegs[2].path === 'new') {
+        if (urlSegs[1].path === 'new') {
           return undefined;
         } else if (urlSegs[2].path === 'edit' && urlSegs[1].path) {
           this.customerId = urlSegs[1].path;
@@ -72,7 +72,6 @@ export class CustomerFormComponent implements OnInit {
       .pipe(
         tap(console.log),
         switchMap((id) => {
-          debugger;
           if (id) {
             console.log(this.customerFormGroup.value);
             return this.customerService.updateCustomer({
@@ -87,6 +86,6 @@ export class CustomerFormComponent implements OnInit {
         }),
         take(1)
       )
-      .subscribe(() => this.router.navigate(['customers']));
+      .subscribe(() => this.router.navigate(['/customers']));
   }
 }
