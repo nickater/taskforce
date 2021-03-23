@@ -17,7 +17,7 @@ export class TaskViewComponent implements OnInit {
   edit = faEdit;
   plus = faPlus;
   //
-  taskAndTaskLogs$: Observable<IProject>;
+  projectAndTasks$: Observable<IProject>;
   projectId: string;
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +26,7 @@ export class TaskViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.taskAndTaskLogs$ = this.route.url.pipe(
+    this.projectAndTasks$ = this.route.url.pipe(
       tap((urlSegs) => (this.projectId = urlSegs[3].path)),
       switchMap((urlSegs) => this.getTasks(urlSegs[3].path))
     );
@@ -38,7 +38,7 @@ export class TaskViewComponent implements OnInit {
 
   deleteTask(taskId: number) {
     if (confirm('Are you sure you want to delete this task?')) {
-      this.taskAndTaskLogs$ = this.taskService.deleteTask(taskId).pipe(
+      this.projectAndTasks$ = this.taskService.deleteTask(taskId).pipe(
         take(1),
         switchMap(() => this.getTasks(this.projectId))
       );
