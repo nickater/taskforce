@@ -37,7 +37,7 @@ export class CustomerService {
     );
   }
 
-  deleteCustomer(customerId: string) {
+  deleteCustomer(customerId: number) {
     return this.serverService
       .request<ICustomer>('PUT', `/customers/${customerId}`, {
         isActive: false,

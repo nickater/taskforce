@@ -23,7 +23,7 @@ export class CustomerViewComponent implements OnInit {
     this.customers$ = this.customerService.getCustomers();
   }
 
-  deleteCustomer(customerId: string) {
+  deleteCustomer(customerId: number) {
     if (confirm('Are you sure you want to delete this customer?')) {
       this.customers$ = this.customerService
         .deleteCustomer(customerId)
