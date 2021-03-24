@@ -1,31 +1,25 @@
-<div class="columns is-centered mt-6">
-  <div class="column is-half">
-    <div class="card">
-      <div class="card-header level">
-        <p class="card-header-title level-item has-text-centered is-size-2 has-text-primary"> Task </p>
-      </div>
-      <div class="card-content"
-           *ngIf="taskFormGroup">
-        <form class="form"
-              [formGroup]="taskFormGroup"
-              (ngSubmit)="submit()">
-          <div class="field">
-            <label class="label">Description</label>
-            <div class="control has-icons-left">
-              <input formControlName="description"
-                     class="input"
-                     type="text"
-                     placeholder="Task description"
-                     value="" />
-              <span class="icon is-small is-left">
-                <fa-icon [icon]="tasksIcon"></fa-icon>
-              </span>
-            </div>
-          </div>
-          <button type="submit"
-                  class="button is-primary">Submit</button>
-        </form>
+<ng-container class="card-content"
+              *ngIf="taskFormGroup">
+  <p class="card-header-title level-item has-text-centered is-size-2 has-text-primary"> Task </p>
+  <form class="form"
+        [formGroup]="taskFormGroup"
+        (ngSubmit)="submit()">
+    <div class="field">
+      <label class="label">Description</label>
+      <div class="control has-icons-left">
+        <input formControlName="description"
+               class="input"
+               type="text"
+               placeholder="Task description"
+               value="" />
+        <span class="icon is-small is-left">
+          <fa-icon [icon]="tasksIcon"></fa-icon>
+        </span>
       </div>
     </div>
-  </div>
-</div>
+    <div class="is-flex is-justify-content-flex-end">
+      <button type="submit"
+              class="button is-primary">Submit</button>
+    </div>
+  </form>
+</ng-container>

@@ -17,6 +17,7 @@ import { TaskViewComponent } from './tasks/view/task-view/task-view.component';
 import { TaskFormComponent } from './tasks/form/task-form/task-form.component';
 import { TaskLogViewComponent } from './task-logs/view/task-log-view.component';
 import { TaskLogFormComponent } from './task-logs/form/task-log-form.component';
+import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { TaskLogFormComponent } from './task-logs/form/task-log-form.component';
     TaskFormComponent,
     TaskLogViewComponent,
     TaskLogFormComponent,
+    BreadcrumbsComponent,
   ],
   imports: [
     BrowserModule,
