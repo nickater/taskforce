@@ -1,4 +1,6 @@
 export default interface ITaskLog {
-  id?: string;
+  id?: number;
   durationInMinutes?: number;
+  taskId: number;
+  createdAt?: Date;
 }
