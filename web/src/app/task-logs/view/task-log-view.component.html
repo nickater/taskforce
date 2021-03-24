@@ -1,29 +1,20 @@
 <div class="section is-medium"
      *ngIf="taskAndTaskLogs$ | async as taskAndTaskLogs">
   <div class="box">
-    <ng-template>
-      <h1 class="title has-text-centered has-text-primary">Logs</h1>
-    </ng-template>
+    <h1 class="title has-text-centered has-text-primary">Time Logs</h1>
     <table class="table is-fullwidth">
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th class=""
-              scope="col">Durations</th>
+          <th scope="col">Durations</th>
+          <th scope="col">Date Added</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let task of taskAndTaskLogs?.taskLogs; index as i">
-          <th scope="row">
-            <a routerLink="/customers/{{ taskAndTaskLogs.id }}/projects/{{
-                taskAndTaskLogs.id
-              }}/tasks/{{ task.id }}/logs">{{ i + 1 }}</a>
-          </th>
-          <td class="">
-            <a routerLink="/customers/{{ taskAndTaskLogs.id }}/projects/{{
-                taskAndTaskLogs.id
-              }}/tasks/{{ task.id }}/logs">{{ task.durationInMinutes | number }}</a>
-          </td>
+          <th scope="row">{{ i + 1 }} </th>
+          <td class="">{{ task.durationInMinutes | number }} </td>
+          <td>{{task.createdAt | date: 'short' }}</td>
         </tr>
       </tbody>
     </table>

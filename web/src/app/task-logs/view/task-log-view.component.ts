@@ -30,20 +30,11 @@ export class TaskLogViewComponent implements OnInit {
     this.taskAndTaskLogs$ = this.route.url.pipe(
       tap((urlSegs) => (this.customerId = urlSegs[1].path)),
       tap((urlSegs) => (this.projectId = urlSegs[3].path)),
-      switchMap((urlSegs) => this.getTaskLogs(urlSegs[3].path))
+      switchMap((urlSegs) => this.getTaskLogs(urlSegs[5].path))
     );
   }
 
   getTaskLogs(taskId: string) {
     return this.taskService.getTaskLogs(taskId);
-  }
-
-  deleteTask(taskId: string) {
-    if (confirm('Are you sure you want to delete this task?')) {
-      this.taskAndTaskLogs$ = this.taskService.getTaskLogs(taskId).pipe(
-        take(1),
-        switchMap(() => this.getTaskLogs(taskId))
-      );
-    }
   }
 }
