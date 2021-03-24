@@ -1,6 +1,7 @@
 import express from "express";
 import Project from "../models/project.model";
 import Task from "../models/task.model";
+import TaskLog from "../models/taskLog.model";
 const router = express.Router();
 
 // Read
@@ -43,6 +44,12 @@ router.get("/:id/tasks", async (req, res) => {
             isActive: true,
           },
           required: false,
+          include: [
+            {
+              model: TaskLog,
+              required: false,
+            },
+          ],
         },
       ],
     });

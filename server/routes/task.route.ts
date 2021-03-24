@@ -25,8 +25,9 @@ router.get("/:id", async (req, res) => {
 // Get TaskLogs by Task Id
 router.get("/:id/taskLogs", async (req, res) => {
   try {
+    console.log(req.params.id);
     const task = await Task.findByPk(req.params.id, { include: "taskLogs" });
-    res.json(task?.taskLogs);
+    res.json(task);
   } catch (error) {
     res.sendStatus(500);
   }

@@ -1,5 +1,6 @@
 import express from "express";
 import TaskLog from "../models/taskLog.model";
+import { decodeJwt, UserCredentials } from "../services/auth/authorization";
 const router = express.Router();
 
 // Read
@@ -24,7 +25,14 @@ router.get("/:id", async (req, res) => {
 // Create
 router.post("/", async (req, res) => {
   try {
-    const taskLog = await TaskLog.create(req.body);
+    const header = req.headers.authorization;
+    const user = decodeJwt(header!) as UserCredentials;
+
+    const bodyWithUserId = {
+      ...req.body,
+      userId: user.id,
+    };
+    const taskLog = await TaskLog.create(bodyWithUserId);
     res.json(taskLog);
   } catch (error) {
     res.status(500).json(error);

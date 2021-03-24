@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 
-export const db = new Sequelize({
+export default new Sequelize({
   database: "taskforce_app_development",
   dialect: "postgres",
   username: "postgres",

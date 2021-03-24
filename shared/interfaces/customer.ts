@@ -1,7 +1,7 @@
 import IProject from "./project";
 
 export default interface ICustomer {
-  id?: string;
+  id?: number;
   name: string;
   isActive?: boolean;
   projects?: IProject[];

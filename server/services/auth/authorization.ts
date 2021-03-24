@@ -31,6 +31,17 @@ export const authenticateJWT = (req: any, res: any, next: any) => {
   }
 };
 
+export function decodeJwt<T>(idToken: string) {
+  if (!secretKey) return;
+
+  if (idToken) {
+    const token = idToken.split(" ")[1];
+
+    const verifiedToken = jwt.verify(token, secretKey!);
+    return verifiedToken;
+  }
+}
+
 export interface UserCredentials {
   id: number;
   emailAddress: string;

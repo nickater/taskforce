@@ -1,14 +1,17 @@
 import * as dotenv from "dotenv";
 dotenv.config();
+
 import express from "express";
 import cors from "cors";
-import { db } from "./db";
+import db from "./db";
 import { authenticateJWT } from "./services/auth/authorization";
 const PORT = process.env.TASKFORCE_SERVER_PORT || 8000;
 const app = express();
+
 app.use(express.json());
 app.use(cors({ origin: "http://localhost:4200" }));
 
+// Routes
 app.use("/customers", authenticateJWT, require("./routes/customer.route"));
 app.use("/projects", authenticateJWT, require("./routes/project.route"));
 app.use("/tasks", authenticateJWT, require("./routes/task.route"));
