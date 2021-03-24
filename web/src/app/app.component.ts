@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from './authentication/auth.service';
 
 @Component({
@@ -7,5 +8,5 @@ import { AuthService } from './authentication/auth.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 }

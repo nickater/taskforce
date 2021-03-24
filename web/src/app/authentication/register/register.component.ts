@@ -13,8 +13,10 @@ export class RegisterComponent implements OnInit {
   faEnvelope = faEnvelope;
   faKey = faKey;
   //
-
   registerFormGroup: FormGroup;
+  emailIsInvalid = false;
+  passwordIsInvalid = false;
+  registrationFailed = false;
 
   constructor(
     private fb: FormBuilder,
@@ -36,11 +38,17 @@ export class RegisterComponent implements OnInit {
   }
 
   async submit() {
+    if (this.registerFormGroup.get('emailAddress').invalid)
+      this.emailIsInvalid = true;
+    if (this.registerFormGroup.get('password').invalid)
+      this.passwordIsInvalid = true;
     if (this.registerFormGroup.valid) {
-      await this.registerService.register(this.registerFormGroup.value);
-      console.log('Registered!');
-    } else {
-      alert('WRONG');
+      this.registerService
+        .register(this.registerFormGroup.value)
+        .catch((err) => {
+          this.registrationFailed = true;
+          this.registerFormGroup = this.buildForm();
+        });
     }
   }
 }

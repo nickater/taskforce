@@ -14,6 +14,9 @@ export class LoginComponent implements OnInit {
   //
 
   loginFormGroup: FormGroup;
+  emailIsInvalid = false;
+  passwordIsInvalid = false;
+  loginFailed = false;
 
   constructor(private fb: FormBuilder, private loginService: LoginService) {}
 
@@ -32,7 +35,15 @@ export class LoginComponent implements OnInit {
   }
 
   async submit() {
-    await this.loginService.authenticate(this.loginFormGroup.value);
-    console.log('DONE');
+    if (this.loginFormGroup.get('emailAddress').invalid)
+      this.emailIsInvalid = true;
+    if (this.loginFormGroup.get('password').invalid)
+      this.passwordIsInvalid = true;
+    if (this.loginFormGroup.valid) {
+      this.loginService.authenticate(this.loginFormGroup.value).catch((err) => {
+        this.loginFailed = true;
+        this.loginFormGroup = this.buildForm();
+      });
+    }
   }
 }
