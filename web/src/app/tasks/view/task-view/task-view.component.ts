@@ -4,6 +4,7 @@ import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Observable, Subject } from 'rxjs';
 import { switchMap, take, tap } from 'rxjs/operators';
 import IProject from '../../../../../../shared/interfaces/project';
+import ITaskLog from '../../../../../../shared/interfaces/taskLog';
 import { TaskService } from '../../task.service';
 
 @Component({
@@ -43,5 +44,11 @@ export class TaskViewComponent implements OnInit {
         switchMap(() => this.getTasks(this.projectId))
       );
     }
+  }
+
+  getTotalTimeLogged(taskLogs: ITaskLog[]) {
+    let totalTime = 0;
+    taskLogs.forEach((log) => (totalTime += log.durationInMinutes));
+    return totalTime;
   }
 }

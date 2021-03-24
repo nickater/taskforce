@@ -13,6 +13,7 @@
           <th scope="col">#</th>
           <th class=""
               scope="col">Description</th>
+          <th scope="col">Time Logged</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -28,6 +29,7 @@
                 projectAndTasks.id
               }}/tasks/{{ task.id }}/logs">{{ task.description }}</a>
           </td>
+          <td>{{getTotalTimeLogged(task.taskLogs)}} minutes</td>
           <td class="is-flex is-justify-content-flex-end">
             <fa-icon class="mr-6"
                      [icon]="edit"
