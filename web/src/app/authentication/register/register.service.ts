@@ -12,7 +12,6 @@ export class RegisterService {
   async register(user: UserFrontend) {
     const credentials = await this.authService.register(user).toPromise();
     if (credentials) {
-      console.log(credentials);
       this.router.navigate(['customers']);
     } else {
       console.error('ERROR');

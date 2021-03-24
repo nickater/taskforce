@@ -13,12 +13,11 @@ export class AuthService {
   private idToken: string;
 
   constructor(private server: ServerService) {
-    console.log('Auth Service');
     const userData = localStorage.getItem('user');
     if (userData) {
-      console.log('Logged in from memory');
       const user = JSON.parse(userData);
       this.idToken = user.token;
+
       this.server.setLoggedIn(true, this.idToken);
       this.loggedIn.next(true);
     }

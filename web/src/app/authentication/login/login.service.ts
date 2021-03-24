@@ -17,7 +17,6 @@ export class LoginService {
   async authenticate(user: UserFrontend) {
     const credentials = await this.authService.login(user).toPromise();
     if (credentials) {
-      console.log(credentials);
       this.router.navigate(['customers']);
     } else {
       console.error('ERROR');

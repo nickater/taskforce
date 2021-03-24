@@ -86,7 +86,6 @@ export class ProjectFormComponent implements OnInit {
       .pipe(
         switchMap((id) => {
           if (id) {
-            console.log(this.projectFormGroup.value);
             return this.projectService.updateProject({
               id,
               ...this.projectFormGroup.value,

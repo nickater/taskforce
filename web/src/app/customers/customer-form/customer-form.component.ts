@@ -47,7 +47,6 @@ export class CustomerFormComponent implements OnInit {
 
   isNewOrEdit() {
     return this.route.url.pipe(
-      tap(console.log),
       map((urlSegs) => {
         if (urlSegs[1].path === 'new') {
           return undefined;
@@ -72,10 +71,8 @@ export class CustomerFormComponent implements OnInit {
   submit() {
     of(this.customerId)
       .pipe(
-        tap(console.log),
         switchMap((id) => {
           if (id) {
-            console.log(this.customerFormGroup.value);
             return this.customerService.updateCustomer({
               id,
               ...this.customerFormGroup.value,

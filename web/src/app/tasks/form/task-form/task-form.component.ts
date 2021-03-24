@@ -91,7 +91,6 @@ export class TaskFormComponent implements OnInit {
       .pipe(
         switchMap((id) => {
           if (id) {
-            console.log(this.taskFormGroup.value);
             return this.taskService.updateTask({
               id,
               ...this.taskFormGroup.value,
