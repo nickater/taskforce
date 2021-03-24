@@ -1,50 +1,45 @@
-<div class="section is-medium"
-     *ngIf="projectAndTasks$ | async as projectAndTasks">
-  <div class="box">
-    <ng-container *ngIf="projectAndTasks.name; else anon">
-      <h1 class="title has-text-centered has-text-primary"> {{ projectAndTasks.name }}'s Tasks </h1>
-    </ng-container>
-    <ng-template #anon>
-      <h1 class="title has-text-centered has-text-primary">Tasks</h1>
-    </ng-template>
-    <table class="table is-fullwidth">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th class=""
-              scope="col">Description</th>
-          <th scope="col">Time Logged</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let task of projectAndTasks?.tasks; index as i">
-          <th scope="row">
-            <a routerLink="/customers/{{ projectAndTasks.id }}/projects/{{
+<ng-container *ngIf="projectAndTasks$ | async as projectAndTasks">
+  <ng-container *ngIf="projectAndTasks.name; else anon">
+    <h1 class="title has-text-centered has-text-primary"> {{ projectAndTasks.name }}'s Tasks </h1>
+  </ng-container>
+  <ng-template #anon>
+    <h1 class="title has-text-centered has-text-primary">Tasks</h1>
+  </ng-template>
+  <table class="table is-fullwidth">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th class=""
+            scope="col">Description</th>
+        <th scope="col">Time Logged</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of projectAndTasks?.tasks; index as i">
+        <th scope="row">
+          <a routerLink="/customers/{{ projectAndTasks.id }}/projects/{{
                 projectAndTasks.id
               }}/tasks/{{ task.id }}/logs">{{ i + 1 }}</a>
-          </th>
-          <td class="">
-            <a routerLink="/customers/{{ projectAndTasks.id }}/projects/{{
+        </th>
+        <td class="">
+          <a routerLink="/customers/{{ projectAndTasks.id }}/projects/{{
                 projectAndTasks.id
               }}/tasks/{{ task.id }}/logs">{{ task.description }}</a>
-          </td>
-          <td>{{getTotalTimeLogged(task.taskLogs)}} minutes</td>
-          <td class="is-flex is-justify-content-flex-end">
-            <fa-icon class="mr-6"
-                     [icon]="edit"
-                     routerLink="{{ task.id }}/edit"></fa-icon>
-            <fa-icon [icon]="trash"
-                     (click)="deleteTask(task.id)"></fa-icon>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="columns is-full">
-      <div class="column is-flex is-justify-content-flex-end">
-        <button class="button is-info is-small"
-                routerLink="new"> Add Task </button>
-      </div>
-    </div>
+        </td>
+        <td>{{getTotalTimeLogged(task.taskLogs)}} minutes</td>
+        <td class="is-flex is-justify-content-flex-end">
+          <fa-icon class="mr-6"
+                   [icon]="edit"
+                   routerLink="{{ task.id }}/edit"></fa-icon>
+          <fa-icon [icon]="trash"
+                   (click)="deleteTask(task.id)"></fa-icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="is-flex is-justify-content-flex-end">
+    <button class="button is-primary"
+            routerLink="new"> Add Task </button>
   </div>
-</div>
+</ng-container>

@@ -1,28 +1,25 @@
-<div class="section is-medium"
-     *ngIf="taskAndTaskLogs$ | async as taskAndTaskLogs">
-  <div class="box">
-    <h1 class="title has-text-centered has-text-primary">Time Logs</h1>
-    <table class="table is-fullwidth">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Durations</th>
-          <th scope="col">Date Added</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let task of taskAndTaskLogs?.taskLogs; index as i">
-          <th scope="row">{{ i + 1 }} </th>
-          <td class="">{{ task.durationInMinutes | number }} </td>
-          <td>{{task.createdAt | date: 'short' }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="columns is-full">
-      <div class="column is-flex is-justify-content-flex-end">
-        <button class="button is-info is-small"
-                routerLink="new"> Add Time </button>
-      </div>
+<ng-container *ngIf="taskAndTaskLogs$ | async as taskAndTaskLogs">
+  <h1 class="title has-text-centered has-text-primary">Time Logs</h1>
+  <table class="table is-fullwidth">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Durations</th>
+        <th scope="col">Date Added</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of taskAndTaskLogs?.taskLogs; index as i">
+        <th scope="row">{{ i + 1 }} </th>
+        <td class="">{{ task.durationInMinutes | number }} minutes </td>
+        <td>{{task.createdAt | date: 'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="columns is-full">
+    <div class="column is-flex is-justify-content-flex-end">
+      <button class="button is-primary"
+              routerLink="new"> Log Time </button>
     </div>
   </div>
-</div>
+</ng-container>

@@ -1,31 +1,24 @@
-<div class="columns is-centered mt-6">
-  <div class="column is-half">
-    <div class="card">
-      <div class="card-header level">
-        <p class="card-header-title level-item has-text-centered is-size-2 has-text-primary"> Customer </p>
-      </div>
-      <div class="card-content"
-           *ngIf="customerFormGroup">
-        <form class="form"
-              [formGroup]="customerFormGroup"
-              (ngSubmit)="submit()">
-          <div class="field">
-            <label class="label">Name</label>
-            <div class="control has-icons-left">
-              <input formControlName="name"
-                     class="input"
-                     type="text"
-                     placeholder="Customer name"
-                     value="" />
-              <span class="icon is-small is-left">
-                <fa-icon [icon]="customerIcon"></fa-icon>
-              </span>
-            </div>
-          </div>
-          <button type="submit"
-                  class="button is-primary">Submit</button>
-        </form>
+<ng-container *ngIf="customerFormGroup">
+  <p class="card-header-title level-item has-text-centered is-size-2 has-text-primary"> Customer </p>
+  <form class="form"
+        [formGroup]="customerFormGroup"
+        (ngSubmit)="submit()">
+    <div class="field">
+      <label class="label">Name</label>
+      <div class="control has-icons-left">
+        <input formControlName="name"
+               class="input"
+               type="text"
+               placeholder="Customer name"
+               value="" />
+        <span class="icon is-small is-left">
+          <fa-icon [icon]="customerIcon"></fa-icon>
+        </span>
       </div>
     </div>
-  </div>
-</div>
+    <div class=" is-flex is-justify-content-flex-end">
+      <button type="submit"
+              class="button is-primary">Submit</button>
+    </div>
+  </form>
+</ng-container>
