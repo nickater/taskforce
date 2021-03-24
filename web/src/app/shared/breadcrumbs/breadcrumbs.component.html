@@ -1,7 +1,10 @@
-<nav class="breadcrumb"
-     aria-label="breadcrumbs"
-     *ngIf="breadcrumbsList$ | async as breadcrumbsList">
-  <ul>
-    <li *ngFor="let link of breadcrumbsList"><a [routerLink]="link.url">{{link.title}}</a></li>
-  </ul>
-</nav>
+<ng-container *ngIf="breadcrumbsList$ | async as breadcrumbsList">
+  <ng-container *ngIf="breadcrumbsList.length">
+    <nav class="breadcrumb pb-5"
+         aria-label="breadcrumbs">
+      <ul>
+        <li *ngFor="let link of breadcrumbsList"><a [routerLink]="link.url">{{link.title}}</a></li>
+      </ul>
+    </nav>
+  </ng-container>
+</ng-container>

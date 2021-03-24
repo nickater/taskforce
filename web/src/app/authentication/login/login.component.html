@@ -1,4 +1,10 @@
 <ng-container *ngIf="loginFormGroup">
+  <ng-container *ngIf="loginFailed">
+    <div class="notification is-danger is-light has-text-centered">
+      <button class="delete"
+              (click)="loginFailed = false">
+      </button> Login was unsuccessful. Please check your credentials and try again. </div>
+  </ng-container>
   <p class="card-header-title level-item has-text-centered is-size-2 has-text-primary"> Login </p>
   <form class="form"
         [formGroup]="loginFormGroup"
@@ -7,9 +13,10 @@
       <label class="label">Email</label>
       <div class="control has-icons-left has-icons-right">
         <input formControlName="emailAddress"
+               [ngClass]="{'is-danger': emailIsInvalid}"
                class="input"
                type="email"
-               placeholder="Email input"
+               placeholder="Email Address"
                value="" />
         <span class="icon is-small is-left">
           <fa-icon [icon]="faEnvelope"></fa-icon>
@@ -18,11 +25,15 @@
           <i class="fas fa-exclamation-triangle"></i>
         </span>
       </div>
+      <ng-container *ngIf="emailIsInvalid">
+        <p class="help is-danger">Email is invalid</p>
+      </ng-container>
     </div>
     <div class="field">
       <label class="label">Password</label>
       <div class="control has-icons-left has-icons-right">
         <input formControlName="password"
+               [ngClass]="{'is-danger': passwordIsInvalid}"
                class="input"
                type="password"
                placeholder="Secret Password"
@@ -34,6 +45,9 @@
           <i class="fas fa-exclamation-triangle"></i>
         </span>
       </div>
+      <ng-container *ngIf="passwordIsInvalid">
+        <p class="help is-danger">Password is invalid</p>
+      </ng-container>
     </div>
     <div class=" is-flex is-justify-content-flex-end">
       <button type="submit"
