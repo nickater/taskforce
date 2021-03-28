@@ -1,70 +1,18 @@
 import express from "express";
-import TaskLog from "../models/taskLog.model";
-import { decodeJwt, UserCredentials } from "../services/auth/authorization";
+import {
+  getAllTaskLogsByTask,
+  createTaskLog,
+  deleteTaskLog,
+  updateTaskLog,
+  getAllTaskLogs,
+  getTaskLogById,
+} from "../controllers/taskLog.controller";
 const router = express.Router();
 
-// Read
-router.get("/", async (req, res) => {
-  try {
-    const taskLogs = await TaskLog.findAll();
-    res.json(taskLogs);
-  } catch (error) {
-    res.sendStatus(500);
-  }
-});
+router.get("/", getAllTaskLogsByTask, getAllTaskLogs);
+router.get("/:id", getTaskLogById);
+router.post("/", createTaskLog);
+router.put("/:id", updateTaskLog);
+router.delete("/:id", deleteTaskLog);
 
-router.get("/:id", async (req, res) => {
-  try {
-    const taskLog = await TaskLog.findByPk(req.params.id);
-    res.json(taskLog);
-  } catch (error) {
-    res.sendStatus(500);
-  }
-});
-
-// Create
-router.post("/", async (req, res) => {
-  try {
-    const header = req.headers.authorization;
-    const user = decodeJwt(header!) as UserCredentials;
-
-    const bodyWithUserId = {
-      ...req.body,
-      userId: user.id,
-    };
-    const taskLog = await TaskLog.create(bodyWithUserId);
-    res.json(taskLog);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
-
-// Update
-router.put("/:id", async (req, res) => {
-  try {
-    const taskLog = await TaskLog.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.json(taskLog);
-  } catch (error) {
-    res.sendStatus(500);
-  }
-});
-
-// Delete
-router.delete("/:id", async (req, res) => {
-  try {
-    const taskLog = await TaskLog.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.sendStatus(200);
-  } catch (error) {
-    res.sendStatus(500);
-  }
-});
-
-module.exports = router;
+export default router;
