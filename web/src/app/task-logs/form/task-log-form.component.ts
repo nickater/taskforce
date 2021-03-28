@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
-import { TaskLogService } from '../task-log.service';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { TaskLogService } from 'src/app/services/task-log.service';
 @Component({
   selector: 'app-task-log-form',
   templateUrl: './task-log-form.component.html',

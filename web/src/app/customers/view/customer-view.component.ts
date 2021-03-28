@@ -1,9 +1,9 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CustomerService } from '../customer.service';
 import Customer from '../../../../../shared/interfaces/customer';
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { switchMap, take } from 'rxjs/operators';
+import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   templateUrl: './customer-view.component.html',

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import IProject from '../../../../../../shared/interfaces/project';
-import { ProjectService } from '../../project.service';
+import { ProjectService } from '../../../services/project.service';
 import { faProjectDiagram } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-project-form',

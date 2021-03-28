@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
-import { tap, switchMap, take } from 'rxjs/operators';
+import { tap, switchMap, take, map } from 'rxjs/operators';
+import { TaskLogService } from 'src/app/services/task-log.service';
 import ITask from '../../../../../shared/interfaces/task';
-import { TaskLogService } from '../task-log.service';
+import { TaskLogAdapterService } from '../task-log-adapter.service';
 
 @Component({
   selector: 'app-task-log-view',
@@ -16,25 +17,28 @@ export class TaskLogViewComponent implements OnInit {
   plus = faPlus;
   //
   taskAndTaskLogs$: Observable<ITask>;
-  customerId: string;
-  projectId: string;
-  taskId: string;
+  // customerId: string;
+  // projectId: string;
+  taskId: number;
 
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskLogService,
-    private router: Router
+    private router: Router,
+    private taskLogAdapterService: TaskLogAdapterService
   ) {}
 
   ngOnInit(): void {
-    this.taskAndTaskLogs$ = this.route.url.pipe(
-      tap((urlSegs) => (this.customerId = urlSegs[1].path)),
-      tap((urlSegs) => (this.projectId = urlSegs[3].path)),
-      switchMap((urlSegs) => this.getTaskLogs(urlSegs[5].path))
-    );
+    this.taskAndTaskLogs$ = this.getTaskLogs();
   }
 
-  getTaskLogs(taskId: string) {
-    return this.taskService.getTaskLogs(taskId);
+  getTaskLogs() {
+    return this.route.url.pipe(
+      map((urlSegs) => Number(urlSegs[5].path)),
+      tap((taskId) => (this.taskId = taskId)),
+      switchMap((taskId) =>
+        this.taskLogAdapterService.getTaskAndTaskLogs(taskId)
+      )
+    );
   }
 }

@@ -31,7 +31,7 @@ export const authenticateJWT = (req: any, res: any, next: any) => {
   }
 };
 
-export function decodeJwt<T>(idToken: string) {
+export function decodeJwt(idToken: string) {
   if (!secretKey) return;
 
   if (idToken) {

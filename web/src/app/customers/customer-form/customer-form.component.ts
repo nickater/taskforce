@@ -3,10 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
-import { ServerService } from 'src/app/services/server.service';
 import ICustomer from '../../../../../shared/interfaces/customer';
-import { CustomerService } from '../customer.service';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-customer-form',

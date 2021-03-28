@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
-import IProject from '../../../../../../shared/interfaces/project';
-import { ProjectService } from '../../project.service';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { ProjectService } from '../../../services/project.service';
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
 import ICustomer from '../../../../../../shared/interfaces/customer';
+import { CustomerService } from 'src/app/services/customer.service';
+import { ProjectAdapterService } from '../../project-adapter.service';
 
 @Component({
   selector: 'app-project-view',
@@ -22,18 +23,23 @@ export class ProjectViewComponent implements OnInit {
   customerAndProjects$: Observable<ICustomer>;
   constructor(
     private route: ActivatedRoute,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private customerService: CustomerService,
+    private projectAdapter: ProjectAdapterService
   ) {}
 
   ngOnInit(): void {
-    this.customerAndProjects$ = this.route.url.pipe(
-      tap((urlSegs) => (this.customerId = urlSegs[1].path)),
-      switchMap((urlSegs) => this.projectService.getProjects(this.customerId))
-    );
+    this.customerAndProjects$ = this.getProjects();
   }
 
-  getProjects(customerId: string) {
-    return this.projectService.getProjects(customerId);
+  getProjects() {
+    return this.route.url.pipe(
+      map((urlSegs) => urlSegs[1].path),
+      tap((customerId) => (this.customerId = customerId)),
+      switchMap((customerId) =>
+        this.projectAdapter.getCustomerAndProjects(customerId)
+      )
+    );
   }
 
   deleteProject(projectId: number) {
@@ -41,7 +47,9 @@ export class ProjectViewComponent implements OnInit {
       this.customerAndProjects$ = this.projectService
         .deleteProject(projectId)
         .pipe(
-          switchMap(() => this.projectService.getProjects(this.customerId))
+          switchMap(() =>
+            this.projectAdapter.getCustomerAndProjects(this.customerId)
+          )
         );
     }
   }

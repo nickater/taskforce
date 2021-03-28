@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { switchMap, map, take } from 'rxjs/operators';
 import ITask from '../../../../../../shared/interfaces/task';
-import { TaskService } from '../../task.service';
 import { faTasks } from '@fortawesome/free-solid-svg-icons';
+import { TaskService } from 'src/app/services/task.service';
 @Component({
   selector: 'app-task-form',
   templateUrl: './task-form.component.html',
@@ -68,7 +68,7 @@ export class TaskFormComponent implements OnInit {
           urlSegs[options.edit.taskId]?.path
         ) {
           this.taskId = urlSegs[options.edit.taskId].path;
-          return urlSegs[options.edit.taskId].path;
+          return Number(urlSegs[options.edit.taskId].path);
         }
       })
     );
