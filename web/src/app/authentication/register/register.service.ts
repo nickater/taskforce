@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import UserFrontend from '../user';
+import IUser from '../../../../../shared/interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import UserFrontend from '../user';
 export class RegisterService {
   constructor(private authService: AuthService, private router: Router) {}
 
-  async register(user: UserFrontend) {
+  async register(user: IUser) {
     const credentials = await this.authService.register(user).toPromise();
     if (credentials) {
       this.router.navigate(['customers']);

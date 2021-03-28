@@ -1,9 +1,9 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import Customer from '../../../../../shared/interfaces/customer';
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { switchMap, take } from 'rxjs/operators';
 import { CustomerService } from 'src/app/services/customer.service';
+import ICustomer from '../../../../../shared/interfaces/customer';
 
 @Component({
   templateUrl: './customer-view.component.html',
@@ -15,7 +15,7 @@ export class CustomerViewComponent implements OnInit {
   edit = faEdit;
   plus = faPlus;
   //
-  customers$: Observable<Customer[]>;
+  customers$: Observable<ICustomer[]>;
 
   constructor(private customerService: CustomerService) {}
 

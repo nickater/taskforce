@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
 import { createJwt } from "../services/auth/authorization";
+import bcrypt from "bcrypt";
 import User from "../models/user.model";
 
 const register = async (req: Request, res: Response) => {

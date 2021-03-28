@@ -5,7 +5,6 @@ import { map, switchMap, tap } from 'rxjs/operators';
 import { ProjectService } from '../../../services/project.service';
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
 import ICustomer from '../../../../../../shared/interfaces/customer';
-import { CustomerService } from 'src/app/services/customer.service';
 import { ProjectAdapterService } from '../../project-adapter.service';
 
 @Component({
@@ -24,7 +23,6 @@ export class ProjectViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
-    private customerService: CustomerService,
     private projectAdapter: ProjectAdapterService
   ) {}
 

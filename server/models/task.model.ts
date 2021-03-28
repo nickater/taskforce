@@ -5,8 +5,6 @@ import {
   HasMany,
   AllowNull,
   DataType,
-  IsUUID,
-  PrimaryKey,
   BelongsTo,
   ForeignKey,
 } from "sequelize-typescript";

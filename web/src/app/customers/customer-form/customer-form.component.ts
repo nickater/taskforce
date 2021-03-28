@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { map, switchMap, take, tap } from 'rxjs/operators';
-import ICustomer from '../../../../../shared/interfaces/customer';
+import { map, switchMap, take } from 'rxjs/operators';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { CustomerService } from 'src/app/services/customer.service';
+import ICustomer from '../../../../../shared/interfaces/customer';
 
 @Component({
   selector: 'app-customer-form',
@@ -13,9 +13,11 @@ import { CustomerService } from 'src/app/services/customer.service';
   styleUrls: ['./customer-form.component.scss'],
 })
 export class CustomerFormComponent implements OnInit {
+  // Icons
+  customerIcon = faUserPlus;
+  //
   customerFormGroup$: Observable<FormGroup>;
   customerId: string;
-  customerIcon = faUserPlus;
 
   constructor(
     private route: ActivatedRoute,

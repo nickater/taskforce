@@ -1,7 +1,7 @@
 <nav class="navbar"
      role="navigation"
      aria-label="main navigation">
-  <ng-container *ngIf="authService.isLoggedIn | async; else login">
+  <ng-container *ngIf="authService.isLoggedIn$ | async; else login">
     <div class="container">
       <div class="navbar-brand">
         <a class="navbar-item is-size-3 has-text-primary"

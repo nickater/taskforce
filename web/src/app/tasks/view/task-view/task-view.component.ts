@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { TaskService } from 'src/app/services/task.service';
+import { TaskAdapterService } from '../../task-adapter.service';
 import IProject from '../../../../../../shared/interfaces/project';
 import ITaskLog from '../../../../../../shared/interfaces/taskLog';
-import { TaskAdapterService } from '../../task-adapter.service';
 
 @Component({
   selector: 'app-task-view',

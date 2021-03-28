@@ -1,7 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import IProject from '../../../../shared/interfaces/project';
 import ITask from '../../../../shared/interfaces/task';
 import { ServerService } from '../services/server.service';
 
@@ -14,10 +13,6 @@ export class TaskService {
   getTasksByProjectId(projectId: number) {
     const params = new HttpParams().append('projectid', `${projectId}`);
     return this.serverService.request<ITask[]>('GET', `/tasks`, {}, params);
-  }
-
-  getTasks(projectId: number) {
-    return this.serverService.request<IProject>('GET', `/tasks/${projectId}`);
   }
 
   getTaskById(taskId: number): Observable<ITask> {

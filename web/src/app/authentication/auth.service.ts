@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ServerService } from '../services/server.service';
-import UserFrontend from './user';
+import IUser from '../../../../shared/interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +22,7 @@ export class AuthService {
     }
   }
 
-  login(user: UserFrontend) {
+  login(user: IUser) {
     if (user.emailAddress && user.password) {
       return this.server
         .request('POST', '/auth/login', {
@@ -44,7 +43,7 @@ export class AuthService {
     }
   }
 
-  register(user: UserFrontend) {
+  register(user: IUser) {
     if (user.emailAddress && user.password) {
       return this.server
         .request('POST', '/auth/register', {
@@ -73,7 +72,7 @@ export class AuthService {
     localStorage.clear();
   }
 
-  get isLoggedIn() {
+  get isLoggedIn$() {
     return this.loggedIn.asObservable();
   }
 }

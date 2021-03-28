@@ -3,7 +3,6 @@ import { ServerService } from './server.service';
 import IProject from '../../../../shared/interfaces/project';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import ICustomer from '../../../../shared/interfaces/customer';
 import { HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
@@ -11,7 +10,7 @@ import { HttpParams } from '@angular/common/http';
 export class ProjectService {
   constructor(private serverService: ServerService) {}
 
-  getProjectsByCustomerId(customerId: string) {
+  getProjectsByCustomerId(customerId: string): Observable<IProject[]> {
     const params = new HttpParams().append('customerid', customerId);
     return this.serverService.request<IProject[]>(
       'GET',
@@ -28,11 +27,11 @@ export class ProjectService {
     );
   }
 
-  createProject(project: IProject) {
+  createProject(project: IProject): Observable<IProject> {
     return this.serverService.request<IProject>('POST', `/projects/`, project);
   }
 
-  updateProject(project: Partial<IProject>) {
+  updateProject(project: Partial<IProject>): Observable<IProject> {
     return this.serverService.request<IProject>(
       'PUT',
       `/projects/${project.id}`,
@@ -40,7 +39,7 @@ export class ProjectService {
     );
   }
 
-  deleteProject(projectId: number) {
+  deleteProject(projectId: number): Observable<IProject> {
     return this.serverService
       .request<IProject>('PUT', `/projects/${projectId}`, {
         isActive: false,

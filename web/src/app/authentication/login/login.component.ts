@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from './login.service';
 import { faKey, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  async submit() {
+  submit() {
     if (this.loginFormGroup.get('emailAddress').invalid)
       this.emailIsInvalid = true;
     if (this.loginFormGroup.get('password').invalid)

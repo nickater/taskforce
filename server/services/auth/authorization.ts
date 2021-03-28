@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
 const secretKey = process.env.JWT_SECRET_KEY;
 
@@ -12,7 +12,11 @@ export function createJwt(credentials: UserCredentials) {
   return token;
 }
 
-export const authenticateJWT = (req: any, res: any, next: any) => {
+export const authenticateJWT = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const authHeader = req.headers.authorization;
 
   if (authHeader) {
@@ -22,8 +26,6 @@ export const authenticateJWT = (req: any, res: any, next: any) => {
       if (err) {
         return res.sendStatus(403);
       }
-
-      req.user = user;
       next();
     });
   } else {

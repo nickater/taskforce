@@ -1,6 +1,5 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import ITask from '../../../../shared/interfaces/task';
 import ITaskLog from '../../../../shared/interfaces/taskLog';
 import { ServerService } from '../services/server.service';
 
@@ -18,10 +17,6 @@ export class TaskLogService {
       {},
       params
     );
-  }
-
-  getTaskLogs(taskId: number) {
-    return this.serverService.request<ITask>('GET', `/tasklogs/${taskId}`);
   }
 
   createTaskLog(taskLog: ITaskLog) {
