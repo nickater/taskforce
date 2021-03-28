@@ -1,5 +1,5 @@
 <ng-container *ngIf="customerAndProjects$ | async as customerAndProjects">
-  <h1 class="title has-text-centered has-text-primary"> {{ customerAndProjects.name }} - Projects </h1>
+  <h1 class="title has-text-centered has-text-primary"> {{ customerAndProjects.name | titlecase}} - Projects </h1>
   <table class="table is-fullwidth">
     <thead>
       <tr>
