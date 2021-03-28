@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { switchMap, map, take } from 'rxjs/operators';
 import ITask from '../../../../../../shared/interfaces/task';
 import { faTasks } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./task-form.component.scss'],
 })
 export class TaskFormComponent implements OnInit {
-  taskFormGroup: FormGroup;
+  taskFormGroup$: Observable<FormGroup>;
   customerId: string;
   projectId: string;
   taskId: string;
@@ -26,23 +26,20 @@ export class TaskFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.initializeForm();
+    this.taskFormGroup$ = this.initializeForm();
   }
 
   initializeForm() {
-    this.isNewOrEdit()
-      .pipe(
-        switchMap((res) => {
-          if (res) {
-            return this.taskService.getTaskById(res);
-          } else {
-            return of(undefined);
-          }
-        })
-      )
-      .subscribe((task) => {
-        this.taskFormGroup = this.buildForm(task);
-      });
+    return this.isNewOrEdit().pipe(
+      switchMap((res) => {
+        if (res) {
+          return this.taskService.getTaskById(res);
+        } else {
+          return of(undefined);
+        }
+      }),
+      map((task) => this.buildForm(task))
+    );
   }
 
   isNewOrEdit() {
@@ -86,17 +83,17 @@ export class TaskFormComponent implements OnInit {
     return formGroup;
   }
 
-  submit() {
+  submit(taskFormGroup: FormGroup) {
     of(this.taskId)
       .pipe(
         switchMap((id) => {
           if (id) {
             return this.taskService.updateTask({
               id,
-              ...this.taskFormGroup.value,
+              ...taskFormGroup.value,
             });
           } else {
-            return this.taskService.createTask(this.taskFormGroup.value);
+            return this.taskService.createTask(taskFormGroup.value);
           }
         }),
         take(1)

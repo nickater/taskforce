@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import ICustomer from '../../../../../shared/interfaces/customer';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +13,7 @@ import { CustomerService } from 'src/app/services/customer.service';
   styleUrls: ['./customer-form.component.scss'],
 })
 export class CustomerFormComponent implements OnInit {
-  customerFormGroup: FormGroup;
+  customerFormGroup$: Observable<FormGroup>;
   customerId: string;
   customerIcon = faUserPlus;
 
@@ -25,23 +25,20 @@ export class CustomerFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.initializeForm();
+    this.customerFormGroup$ = this.fetchForm();
   }
 
-  initializeForm() {
-    this.isNewOrEdit()
-      .pipe(
-        switchMap((res) => {
-          if (res) {
-            return this.customerService.getCustomerById(res);
-          } else {
-            return of(undefined);
-          }
-        })
-      )
-      .subscribe((customer) => {
-        this.customerFormGroup = this.buildForm(customer);
-      });
+  fetchForm() {
+    return this.isNewOrEdit().pipe(
+      switchMap((res) => {
+        if (res) {
+          return this.customerService.getCustomerById(res);
+        } else {
+          return of(undefined);
+        }
+      }),
+      map((customer) => this.buildForm(customer))
+    );
   }
 
   isNewOrEdit() {
@@ -67,19 +64,17 @@ export class CustomerFormComponent implements OnInit {
     return formGroup;
   }
 
-  submit() {
+  submit(customerFormGroup: FormGroup) {
     of(this.customerId)
       .pipe(
         switchMap((id) => {
           if (id) {
             return this.customerService.updateCustomer({
               id,
-              ...this.customerFormGroup.value,
+              ...customerFormGroup.value,
             });
           } else {
-            return this.customerService.createCustomer(
-              this.customerFormGroup.value
-            );
+            return this.customerService.createCustomer(customerFormGroup.value);
           }
         }),
         take(1)

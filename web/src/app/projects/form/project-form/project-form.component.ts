@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import IProject from '../../../../../../shared/interfaces/project';
 import { ProjectService } from '../../../services/project.service';
@@ -12,7 +12,7 @@ import { faProjectDiagram } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./project-form.component.scss'],
 })
 export class ProjectFormComponent implements OnInit {
-  projectFormGroup: FormGroup;
+  projectFormGroup$: Observable<FormGroup>;
   projectId: string;
   customerId: string;
   projectIcon = faProjectDiagram;
@@ -25,23 +25,20 @@ export class ProjectFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.initializeForm();
+    this.projectFormGroup$ = this.initializeForm();
   }
 
   initializeForm() {
-    this.isNewOrEdit()
-      .pipe(
-        switchMap((res) => {
-          if (res) {
-            return this.projectService.getProjectById(res);
-          } else {
-            return of(undefined);
-          }
-        })
-      )
-      .subscribe((project) => {
-        this.projectFormGroup = this.buildForm(project);
-      });
+    return this.isNewOrEdit().pipe(
+      switchMap((res) => {
+        if (res) {
+          return this.projectService.getProjectById(res);
+        } else {
+          return of(undefined);
+        }
+      }),
+      map((project) => this.buildForm(project))
+    );
   }
 
   isNewOrEdit() {
@@ -81,19 +78,17 @@ export class ProjectFormComponent implements OnInit {
     return formGroup;
   }
 
-  submit() {
+  submit(projectFormGroup: FormGroup) {
     of(this.projectId)
       .pipe(
         switchMap((id) => {
           if (id) {
             return this.projectService.updateProject({
               id,
-              ...this.projectFormGroup.value,
+              ...projectFormGroup.value,
             });
           } else {
-            return this.projectService.createProject(
-              this.projectFormGroup.value
-            );
+            return this.projectService.createProject(projectFormGroup.value);
           }
         }),
         take(1)

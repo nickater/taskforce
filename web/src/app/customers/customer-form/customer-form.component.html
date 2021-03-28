@@ -1,8 +1,8 @@
-<ng-container *ngIf="customerFormGroup">
+<ng-container *ngIf="customerFormGroup$ | async as customerFormGroup">
   <p class="card-header-title level-item has-text-centered is-size-2 has-text-primary"> Customer </p>
   <form class="form"
         [formGroup]="customerFormGroup"
-        (ngSubmit)="submit()">
+        (ngSubmit)="submit(customerFormGroup)">
     <div class="field">
       <label class="label">Name</label>
       <div class="control has-icons-left">

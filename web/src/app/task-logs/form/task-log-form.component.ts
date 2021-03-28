@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { TaskLogService } from 'src/app/services/task-log.service';
+import ITaskLog from '../../../../../shared/interfaces/taskLog';
 @Component({
   selector: 'app-task-log-form',
   templateUrl: './task-log-form.component.html',
   styleUrls: ['./task-log-form.component.scss'],
 })
 export class TaskLogFormComponent implements OnInit {
-  taskLogFormGroup: FormGroup;
+  taskLogFormGroup$: Observable<FormGroup>;
   customerId: number;
   projectId: number;
   taskId: number;
@@ -25,13 +26,11 @@ export class TaskLogFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.initializeForm();
+    this.taskLogFormGroup$ = this.initializeForm();
   }
 
   initializeForm() {
-    this.fetchIds().subscribe((ids) => {
-      this.taskLogFormGroup = this.buildForm(ids.taskId);
-    });
+    return this.fetchIds().pipe(map((ids) => this.buildForm(ids.taskId)));
   }
 
   fetchIds() {
@@ -60,16 +59,16 @@ export class TaskLogFormComponent implements OnInit {
   buildForm(taskId: number) {
     const formGroup = this.fb.group({
       durationInMinutes: this.fb.control('', Validators.required),
-      taskId: this.fb.control(this.taskId),
+      taskId: this.fb.control(taskId),
     });
     return formGroup;
   }
 
-  submit() {
+  submit(taskLogFormGroup: FormGroup) {
     of(this.taskId)
       .pipe(
         switchMap((id) =>
-          this.taskLogService.createTaskLog(this.taskLogFormGroup.value)
+          this.taskLogService.createTaskLog(taskLogFormGroup.value)
         ),
         take(1)
       )

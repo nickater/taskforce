@@ -32,7 +32,11 @@ export class TaskViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.projectAndTasks$ = this.route.url.pipe(
+    this.projectAndTasks$ = this.getTasks();
+  }
+
+  getTasks() {
+    return this.route.url.pipe(
       map((urlSegs) => ({
         customerId: urlSegs[1].path,
         projectId: urlSegs[3].path,

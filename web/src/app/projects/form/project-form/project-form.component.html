@@ -1,9 +1,9 @@
 <ng-container class="card-content"
-              *ngIf="projectFormGroup">
+              *ngIf="projectFormGroup$ | async as projectFormGroup">
   <p class="card-header-title level-item has-text-centered is-size-2 has-text-primary"> Project </p>
   <form class="form"
         [formGroup]="projectFormGroup"
-        (ngSubmit)="submit()">
+        (ngSubmit)="submit(projectFormGroup)">
     <div class="field">
       <label class="label">Name</label>
       <div class="control has-icons-left">

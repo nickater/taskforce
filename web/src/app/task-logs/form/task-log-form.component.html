@@ -1,9 +1,9 @@
 <ng-container class="card-content"
-              *ngIf="taskLogFormGroup">
+              *ngIf="taskLogFormGroup$ | async as taskLogFormGroup">
   <p class="card-header-title level-item has-text-centered is-size-2 has-text-primary"> Log Time </p>
   <form class="form"
         [formGroup]="taskLogFormGroup"
-        (ngSubmit)="submit()">
+        (ngSubmit)="submit(taskLogFormGroup)">
     <div class="field">
       <label class="label">Duration (minutes)</label>
       <div class="control has-icons-left">

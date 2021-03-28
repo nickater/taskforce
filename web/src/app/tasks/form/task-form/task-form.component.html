@@ -1,9 +1,9 @@
 <ng-container class="card-content"
-              *ngIf="taskFormGroup">
+              *ngIf="taskFormGroup$ | async as taskFormGroup">
   <p class="card-header-title level-item has-text-centered is-size-2 has-text-primary"> Task </p>
   <form class="form"
         [formGroup]="taskFormGroup"
-        (ngSubmit)="submit()">
+        (ngSubmit)="submit(taskFormGroup)">
     <div class="field">
       <label class="label">Description</label>
       <div class="control has-icons-left">

@@ -17,8 +17,8 @@
     <tbody>
       <tr *ngFor="let task of projectAndTasks?.tasks; index as i">
         <th scope="row">
-          <a routerLink="/customers/{{ projectAndTasks.id }}/projects/{{
-                projectAndTasks.id
+          <a routerLink="/customers/{{ customerId }}/projects/{{
+                projectId
               }}/tasks/{{ task.id }}/logs">{{ i + 1 }}</a>
         </th>
         <td class="">
