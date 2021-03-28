@@ -1,7 +1,6 @@
 import { Table, Column, Model, HasMany, AllowNull } from "sequelize-typescript";
 import Project from "./project.model";
 import ICustomer from "../../shared/interfaces/customer";
-import IProject from "../../shared/interfaces/project";
 @Table({
   timestamps: true,
   tableName: "customers",
@@ -17,5 +16,5 @@ export default class Customer extends Model implements ICustomer {
   isActive?: boolean;
 
   @HasMany(() => Project)
-  projects?: IProject[];
+  projects?: Project[];
 }

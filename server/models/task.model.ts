@@ -11,7 +11,6 @@ import {
 import Project from "./project.model";
 import TaskLog from "./taskLog.model";
 import ITask from "../../shared/interfaces/task";
-import ITaskLog from "../../shared/interfaces/taskLog";
 @Table({
   timestamps: true,
   tableName: "tasks",
@@ -35,5 +34,5 @@ export default class Task extends Model implements ITask {
   projectId!: number;
 
   @HasMany(() => TaskLog)
-  taskLogs?: ITaskLog[];
+  taskLogs?: TaskLog[];
 }
