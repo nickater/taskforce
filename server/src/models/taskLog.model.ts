@@ -8,7 +8,7 @@ import {
 } from "sequelize-typescript";
 import Task from "./task.model";
 import User from "./user.model";
-import ITaskLog from "../../shared/interfaces/taskLog";
+import ITaskLog from "../../../shared/interfaces/taskLog";
 
 @Table({
   timestamps: true,

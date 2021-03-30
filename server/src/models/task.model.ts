@@ -10,7 +10,7 @@ import {
 } from "sequelize-typescript";
 import Project from "./project.model";
 import TaskLog from "./taskLog.model";
-import ITask from "../../shared/interfaces/task";
+import ITask from "../../../shared/interfaces/task";
 @Table({
   timestamps: true,
   tableName: "tasks",

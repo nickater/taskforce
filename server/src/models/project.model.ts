@@ -9,7 +9,7 @@ import {
 } from "sequelize-typescript";
 import Task from "./task.model";
 import Customer from "./customer.model";
-import IProject from "../../shared/interfaces/project";
+import IProject from "../../../shared/interfaces/project";
 
 @Table({
   timestamps: true,

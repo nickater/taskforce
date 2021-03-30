@@ -1,6 +1,7 @@
 import { Table, Column, Model, HasMany, AllowNull } from "sequelize-typescript";
 import Project from "./project.model";
-import ICustomer from "../../shared/interfaces/customer";
+import ICustomer from "../../../shared/interfaces/customer";
+
 @Table({
   timestamps: true,
   tableName: "customers",

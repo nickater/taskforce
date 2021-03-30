@@ -4,12 +4,14 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import db from "./db";
-import { authenticateJWT } from "./services/auth/authorization";
-import CustomerRouter from "./routes/customer.route";
-import ProjectRouter from "./routes/project.route";
-import TaskRouter from "./routes/task.route";
-import TaskLogRouter from "./routes/taskLog.route";
-import AuthRouter from "./routes/auth.route";
+import { authenticateJWT } from "./src/services/auth/authorization";
+import {
+  AuthRouter,
+  CustomerRouter,
+  ProjectRouter,
+  TaskRouter,
+  TaskLogRouter,
+} from "./src/routes/router-exports";
 
 const PORT = process.env.TASKFORCE_SERVER_PORT || 8000;
 const app = express();
