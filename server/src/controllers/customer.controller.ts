@@ -8,6 +8,7 @@ export const getAllCustomers = async (req: Request, res: Response) => {
       where: {
         isActive: true,
       },
+      order: [["createdAt", "ASC"]],
     });
     res.json(customers);
   } catch (error) {

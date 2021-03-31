@@ -22,6 +22,7 @@ const getAllProjectsByCustomer = async (
         customerId: req.query.customerid,
         isActive: true,
       },
+      order: [["createdAt", "ASC"]],
     });
     res.json(projects);
   } catch (error) {

@@ -5,7 +5,9 @@ import { decodeJwt, UserCredentials } from "../services/auth/authorization";
 
 const getAllTaskLogs = async (req: Request, res: Response) => {
   try {
-    const taskLogs = await TaskLog.findAll();
+    const taskLogs = await TaskLog.findAll({
+      order: [["createdAt", "ASC"]],
+    });
     res.json(taskLogs);
   } catch (error) {
     res.status(500).json(error);
@@ -23,6 +25,7 @@ const getAllTaskLogsByTask = async (
       where: {
         taskId: req.query.taskid,
       },
+      order: [["createdAt", "ASC"]],
     });
     res.json(taskLogs);
   } catch (error) {

@@ -9,6 +9,7 @@ const getAllTasks = async (req: Request, res: Response) => {
       where: {
         isActive: true,
       },
+      order: [["createdAt", "ASC"]],
     });
     res.json(tasks);
   } catch (error) {
@@ -31,6 +32,7 @@ const getAllTasksByProject = async (
       include: {
         model: TaskLog,
       },
+      order: [["createdAt", "ASC"]],
     });
     res.json(tasks);
   } catch (error) {
