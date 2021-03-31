@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import ITaskLog from '../../../../shared/interfaces/taskLog';
 import { ServerService } from '../services/server.service';
 
@@ -9,7 +10,7 @@ import { ServerService } from '../services/server.service';
 export class TaskLogService {
   constructor(private serverService: ServerService) {}
 
-  getTaskLogsByTaskId(taskId: number) {
+  getTaskLogsByTaskId(taskId: number): Observable<ITaskLog[]> {
     const params = new HttpParams().append('taskid', `${taskId}`);
     return this.serverService.request<ITaskLog[]>(
       'GET',
@@ -19,7 +20,14 @@ export class TaskLogService {
     );
   }
 
-  createTaskLog(taskLog: ITaskLog) {
+  getTaskLogById(taskLogId: number): Observable<ITaskLog> {
+    return this.serverService.request<ITaskLog>(
+      'GET',
+      `/tasklogs/${taskLogId}`
+    );
+  }
+
+  createTaskLog(taskLog: ITaskLog): Observable<ITaskLog> {
     return this.serverService.request<ITaskLog>('POST', `/tasklogs`, taskLog);
   }
 }

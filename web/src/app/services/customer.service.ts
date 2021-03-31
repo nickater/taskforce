@@ -20,24 +20,24 @@ export class CustomerService {
     return this.serverService.request<ICustomer>('GET', `/customers/${id}`);
   }
 
-  createCustomer(customer: ICustomer) {
+  createCustomer(customer: ICustomer): Observable<ICustomer> {
     return this.serverService.request<ICustomer>('POST', `/customers/`, {
       ...customer,
       isActive: true,
     });
   }
 
-  updateCustomer(customer: Partial<ICustomer>) {
-    return this.serverService.request<ICustomer>(
+  updateCustomer(customer: Partial<ICustomer>): Observable<number> {
+    return this.serverService.request<number>(
       'PUT',
       `/customers/${customer.id}`,
       { name: customer.name }
     );
   }
 
-  deleteCustomer(customerId: number) {
+  deleteCustomer(customerId: number): Observable<nubmer> {
     return this.serverService
-      .request<ICustomer>('PUT', `/customers/${customerId}`, {
+      .request<number>('PUT', `/customers/${customerId}`, {
         isActive: false,
       })
       .pipe(take(1));
