@@ -26,6 +26,6 @@ app.use("/projects", authenticateJWT, ProjectRouter);
 app.use("/tasks", authenticateJWT, TaskRouter);
 app.use("/tasklogs", authenticateJWT, TaskLogRouter);
 
-db.authenticate().then(() => {
+db.sync({ alter: true }).then(() => {
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
