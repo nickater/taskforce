@@ -5,5 +5,5 @@ export default new Sequelize({
   dialect: "postgres",
   username: "postgres",
   password: process.env.TASKFORCE_SQL_PASS,
-  models: [__dirname + "/models/*"],
+  models: [__dirname + "/src/models/*"],
 });
