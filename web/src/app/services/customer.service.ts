@@ -35,7 +35,7 @@ export class CustomerService {
     );
   }
 
-  deleteCustomer(customerId: number): Observable<nubmer> {
+  deleteCustomer(customerId: number): Observable<number> {
     return this.serverService
       .request<number>('PUT', `/customers/${customerId}`, {
         isActive: false,
