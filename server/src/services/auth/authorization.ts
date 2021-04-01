@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import * as jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 const secretKey = process.env.JWT_SECRET_KEY;
 
 export function createJwt(credentials: UserCredentials) {
