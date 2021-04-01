@@ -4,6 +4,8 @@ import IProject from '../../../../shared/interfaces/project';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { HttpParams } from '@angular/common/http';
+
+const projectEndpoint = '/projects';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,7 +16,7 @@ export class ProjectService {
     const params = new HttpParams().append('customerid', customerId);
     return this.serverService.request<IProject[]>(
       'GET',
-      `/projects`,
+      `${projectEndpoint}`,
       {},
       params
     );
@@ -23,18 +25,22 @@ export class ProjectService {
   getProjectById(projectId: string): Observable<IProject> {
     return this.serverService.request<IProject>(
       'GET',
-      `/projects/${projectId}`
+      `${projectEndpoint}/${projectId}`
     );
   }
 
   createProject(project: IProject): Observable<IProject> {
-    return this.serverService.request<IProject>('POST', `/projects/`, project);
+    return this.serverService.request<IProject>(
+      'POST',
+      `${projectEndpoint}/`,
+      project
+    );
   }
 
   updateProject(project: Partial<IProject>): Observable<IProject> {
     return this.serverService.request<IProject>(
       'PUT',
-      `/projects/${project.id}`,
+      `${projectEndpoint}/${project.id}`,
       project
     );
   }

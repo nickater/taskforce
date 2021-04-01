@@ -4,6 +4,8 @@ import ICustomer from '../../../../shared/interfaces/customer';
 import { ServerService } from '../services/server.service';
 import { take } from 'rxjs/operators';
 
+const customerEndpoint = '/customers';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -17,27 +19,34 @@ export class CustomerService {
   }
 
   getCustomerById(id: string): Observable<ICustomer> {
-    return this.serverService.request<ICustomer>('GET', `/customers/${id}`);
+    return this.serverService.request<ICustomer>(
+      'GET',
+      `${customerEndpoint}/${id}`
+    );
   }
 
   createCustomer(customer: ICustomer): Observable<ICustomer> {
-    return this.serverService.request<ICustomer>('POST', `/customers/`, {
-      ...customer,
-      isActive: true,
-    });
+    return this.serverService.request<ICustomer>(
+      'POST',
+      `${customerEndpoint}`,
+      {
+        ...customer,
+        isActive: true,
+      }
+    );
   }
 
   updateCustomer(customer: Partial<ICustomer>): Observable<number> {
     return this.serverService.request<number>(
       'PUT',
-      `/customers/${customer.id}`,
+      `${customerEndpoint}/${customer.id}`,
       { name: customer.name }
     );
   }
 
   deleteCustomer(customerId: number): Observable<number> {
     return this.serverService
-      .request<number>('PUT', `/customers/${customerId}`, {
+      .request<number>('PUT', `${customerEndpoint}/${customerId}`, {
         isActive: false,
       })
       .pipe(take(1));
