@@ -1,4 +1,10 @@
 <ng-container *ngIf="customerFormGroup$ | async as customerFormGroup">
+  <ng-container *ngIf="customerAddFailed">
+    <div class="notification is-danger is-light has-text-centered">
+      <button class="delete"
+              (click)="customerAddFailed = false">
+      </button> Customer creation was unsuccessful. </div>
+  </ng-container>
   <p class="card-header-title level-item has-text-centered is-size-2 has-text-primary"> Customer </p>
   <form class="form"
         [formGroup]="customerFormGroup"

@@ -18,6 +18,7 @@ export class CustomerFormComponent implements OnInit {
   //
   customerFormGroup$: Observable<FormGroup>;
   customerId: string;
+  customerAddFailed = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -81,6 +82,11 @@ export class CustomerFormComponent implements OnInit {
         }),
         take(1)
       )
-      .subscribe(() => this.router.navigate(['/customers']));
+      .subscribe(
+        () => this.router.navigate(['/customers']),
+        () => {
+          this.customerAddFailed = true;
+        }
+      );
   }
 }
