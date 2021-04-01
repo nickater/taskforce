@@ -1,4 +1,3 @@
-import Project from "../models/project.model";
 import { NextFunction, Request, Response } from "express";
 import Task from "../models/task.model";
 import TaskLog from "../models/taskLog.model";
