@@ -1,4 +1,11 @@
-import { Table, Model, HasMany, Column, AllowNull } from "sequelize-typescript";
+import {
+  Table,
+  Model,
+  HasMany,
+  Column,
+  AllowNull,
+  Unique,
+} from "sequelize-typescript";
 import TaskLog from "./taskLog.model";
 
 @Table({
@@ -11,6 +18,7 @@ export default class User extends Model {
   taskLogs?: TaskLog[];
 
   @AllowNull(false)
+  @Unique
   @Column
   emailAddress!: string;
 
