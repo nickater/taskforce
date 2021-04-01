@@ -5,7 +5,7 @@ const secretKey = process.env.JWT_SECRET_KEY;
 export function createJwt(credentials: UserCredentials) {
   let token;
   if (secretKey) {
-    token = jwt.sign(credentials, secretKey, { expiresIn: 60 * 60 });
+    token = jwt.sign(credentials, secretKey, { expiresIn: 60 * 60 * 24 });
   } else {
     console.error("Enviroment variables not set");
   }
